@@ -1,12 +1,10 @@
-package br.com.digix.pokedigix.Lider;
+package br.com.digix.pokedigix.lider;
 
 public class Lider {
     private String nome;
     private int nivel;
     private String insignia;
-
-
-    
+   
     public Lider(String nome, int nivel, String insignia) {
         this.nome = nome;
         this.nivel = nivel;

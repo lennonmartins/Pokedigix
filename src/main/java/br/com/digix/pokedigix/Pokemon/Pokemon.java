@@ -1,10 +1,12 @@
-package br.com.digix.pokedigix.Pokemon;
+package br.com.digix.pokedigix.pokemon;
+
+import br.com.digix.pokedigix.tipo.Tipo;
 
 public class Pokemon {
     private String nome;
     private int nivel;
     private int felicidade;
-    private String tipo;
+    private Tipo tipoPokemon;
     private double altura;
     private double peso;
     private int numeroPokedex;
@@ -15,7 +17,6 @@ public class Pokemon {
         this.nome = nome;
         this.nivel = nivel;
         this.felicidade = felicidade;
-        this.tipo = tipo;
         this.altura = altura;
         this.peso = peso;
         this.numeroPokedex = numeroPokedex;
@@ -61,13 +62,6 @@ public class Pokemon {
     }
     public void setNumeroPokedex(int numeroPokedex) {
         this.numeroPokedex = numeroPokedex;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public int getFelicidade() {
