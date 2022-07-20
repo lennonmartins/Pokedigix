@@ -17,9 +17,9 @@ public class TipoRepositoryTest {
         //Arrange
         String nomeEsperado = "Psíquico";
         Long idEsperado = 1L;
-        Tipo tipo = new Tipo(nomeEsperado);
-
+        
         //Act
+        Tipo tipo = new Tipo(nomeEsperado);
         tipoRepository.save(tipo);
 
         //Assert
