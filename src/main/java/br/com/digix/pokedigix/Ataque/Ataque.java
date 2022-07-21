@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import br.com.digix.pokedigix.ataque.AcuraciaExcepetion;
 
 import br.com.digix.pokedigix.tipo.Tipo;
 @Entity
@@ -59,9 +60,14 @@ public class Ataque {
    public double getAcuracia() {
       return this.acuracia;
    }
-   public void setAcuracia(double acuracia) {
-      this.acuracia = acuracia;
+   public void setAcuracia(double acuracia) throws AcuraciaExcepetion {
+      if (acuracia > 0 && acuracia <100) {
+         this.acuracia = acuracia;
+      }else{
+         throw new AcuraciaExcepetion();
+       }  
    }
+
    public int getPontosDePoder() {
       return this.pontosDePoder;
    }

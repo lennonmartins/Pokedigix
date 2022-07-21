@@ -1,7 +1,9 @@
 package br.com.digix.pokedigix.ataque;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import br.com.digix.pokedigix.ataque.AcuraciaExcepetion;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class AtaqueTest {
@@ -24,6 +26,23 @@ public class AtaqueTest {
         assertEquals(acuraciaEsperada, ataque.getAcuracia());
         assertEquals(pontosDePoderEsperado, ataque.getPontosDePoder());
         assertEquals(descricaoEsperada, ataque.getDescricao());
+
+    }
+    @Test
+    void deve_verificar_uma_acuracia_fora_da_condicao() throws Exception{
+        //Arrange
+        String nomeEsperado = "Confusão";
+        int forcaEsperada = 95;
+        double acuraciaEsperada = 110;
+        int pontosDePoderEsperado = 35;
+        String descricaoEsperada = "Causa confusão no oponente";
+        Categoria categoriaEsperada = Categoria.ESPECIAL;
+      
+
+        //Arrange
+        Assertions.assertThrows(AcuraciaExcepetion.class, () -> {
+            new Ataque(nomeEsperado, forcaEsperada, acuraciaEsperada, pontosDePoderEsperado, descricaoEsperada, categoriaEsperada);
+        });
 
     }
 }

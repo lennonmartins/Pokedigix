@@ -1,16 +1,35 @@
 package br.com.digix.pokedigix.treinador;
 
-public class Treinador {
-    private String nome;
-    private double dinheiro;
-    private int nivel;
-    private int quantidade_pokemon;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-    public Treinador(String nome, double dinheiro, int nivel, int quantidade_pokemon) {
+@Entity
+public class Treinador {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(nullable = false, length = 25)
+    private String nome;
+
+    @Column(nullable = false)
+    private double dinheiro;
+
+    @Column(nullable = false)
+    private int nivel;
+
+    @Column(nullable = false)
+    private int quantidadePokemon;
+
+    public Treinador(String nome, double dinheiro, int nivel, int quantidadePokemon) {
         this.nome = nome;
         this.dinheiro = dinheiro;
         this.nivel = nivel;
-        this.quantidade_pokemon = quantidade_pokemon; 
+        this.quantidadePokemon = quantidadePokemon; 
     }
 
     public String getNome() {
@@ -31,11 +50,15 @@ public class Treinador {
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
-    public void setQuantidade_pokemon(int quantidade_pokemon) {
-        this.quantidade_pokemon = quantidade_pokemon;
+    public void setQuantidadePokemon(int quantidade_pokemon) {
+        this.quantidadePokemon = quantidade_pokemon;
     }
-    public int getQuantidade_pokemon() {
-        return quantidade_pokemon;
+    public int getQuantidadePokemon() {
+        return quantidadePokemon;
+    }
+
+    public Long getId() {
+        return id;
     }
     
 }

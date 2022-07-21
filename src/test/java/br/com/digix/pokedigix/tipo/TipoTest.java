@@ -15,7 +15,7 @@ public class TipoTest {
         //Act
         Tipo tipo = new Tipo(nomeEsperado);
 
-        //Arrange
+        //Assert
         assertEquals(nomeEsperado, tipo.getNome());
 
     }
