@@ -2,6 +2,8 @@ package br.com.digix.pokedigix.lider;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +22,7 @@ public class Lider {
     @Column(nullable = false)
     private int nivel;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Insignia insignia;
    

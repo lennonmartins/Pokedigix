@@ -1,6 +1,7 @@
 package br.com.digix.pokedigix.lider;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,10 @@ public class LiderRepositoryTest {
         String nomeEsperado = "Lennon Broks";
         Insignia insigniaEsperada = Insignia.MENTE; 
         int nivelEsperado = 74;
-        Long idEsperado = 1L;
 
         Lider lider = new Lider(nomeEsperado, nivelEsperado, insigniaEsperada);
         liderRepository.save(lider);
 
-        assertEquals(idEsperado, lider.getId());
-        
+        assertNotNull(lider.getId());
     }
 }

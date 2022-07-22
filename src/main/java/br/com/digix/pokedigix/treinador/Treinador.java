@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import br.com.digix.pokedigix.endereco.Endereco;
 
 @Entity
 public class Treinador {
@@ -25,11 +28,15 @@ public class Treinador {
     @Column(nullable = false)
     private int quantidadePokemon;
 
-    public Treinador(String nome, double dinheiro, int nivel, int quantidadePokemon) {
+    @OneToOne
+    private Endereco endereco;
+
+    public Treinador(String nome, double dinheiro, int nivel, int quantidadePokemon, Endereco endereco) {
         this.nome = nome;
         this.dinheiro = dinheiro;
         this.nivel = nivel;
-        this.quantidadePokemon = quantidadePokemon; 
+        this.quantidadePokemon = quantidadePokemon;
+        this.endereco = endereco; 
     }
 
     public String getNome() {

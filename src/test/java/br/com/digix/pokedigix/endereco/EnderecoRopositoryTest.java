@@ -1,6 +1,7 @@
 package br.com.digix.pokedigix.endereco;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ public class EnderecoRopositoryTest {
         //Arrennge
         String cidadeEsperada = "Petalburg City";
         String regiaoEsperada = "Hoenn";
-        Long idEsperado = 1L;
         
 
         //Act
@@ -29,6 +29,6 @@ public class EnderecoRopositoryTest {
         //Assert
         assertEquals(cidadeEsperada, endereco.getCidade());
         assertEquals(regiaoEsperada, endereco.getRegiao());
-        assertEquals(idEsperado, endereco.getId());
+        assertNotNull(endereco.getId());
     }
 }
