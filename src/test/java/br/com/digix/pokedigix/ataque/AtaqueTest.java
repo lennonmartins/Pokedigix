@@ -64,4 +64,19 @@ public class AtaqueTest {
 
         assertEquals(tipoEsperado, ataque.getTipo());
     }
+
+    @Test
+    public void deve_ser_obrigatorio_informar_um_tipo_para_novo_ataque(){
+        String nomeEsperado = "Beijo Drenante";
+        int forcaEsperada = 50;
+        double acuraciaEsperada = 100;
+        int pontosDePoderEsperado = 10;
+        String descricaoEsperada = "O usuário rouba o HP do alvo com um beijo. O HP do usuário é restaurado em mais da metade do dano recebido pelo alvo.";
+        Categoria categoriaEsperada = Categoria.ESPECIAL;
+        Tipo tipoEsperado = new  Tipo("Fada");
+        
+        Ataque ataque = new Ataque(nomeEsperado, forcaEsperada, acuraciaEsperada, pontosDePoderEsperado, descricaoEsperada, categoriaEsperada, tipoEsperado);
+
+        assertEquals(tipoEsperado, ataque.getTipo());
+    }
 }

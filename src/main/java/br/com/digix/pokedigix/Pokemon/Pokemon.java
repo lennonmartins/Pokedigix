@@ -1,10 +1,19 @@
 package br.com.digix.pokedigix.pokemon;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+
+import org.hibernate.annotations.ManyToAny;
 
 import br.com.digix.pokedigix.tipo.Tipo;
 
@@ -17,20 +26,32 @@ public class Pokemon {
     @Column(nullable = false, length = 20)
     private String nome;
     
-    @Column(nullable = false, length = 1)
-    private String genero;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 10)
+    private Genero genero;
     
+    @Column(nullable = false)
     private int nivel;
     
+    @Column(nullable = false)
     private int felicidade;
-    //private Tipo tipoPokemon;
     
+    @ManyToMany
+    @JoinTable(name="POKEMON_TIPO",
+             joinColumns={@JoinColumn(name="POKEMON_ID")},
+             inverseJoinColumns={@JoinColumn(name="TIPO_ID")})
+    private Collection <Tipo> tipos;
+    
+    @Column(nullable = false)
     private double altura;
+
+    @Column(nullable = false)
     private double peso;
+
+    @Column(nullable = false)
     private int numeroPokedex;
     
-
-    public Pokemon(String nome, int nivel, int felicidade,  double altura, double peso, int numeroPokedex, String genero) {
+    public Pokemon(String nome, int nivel, int felicidade,  double altura, double peso, int numeroPokedex, Genero genero, Collection<Tipo> tipos ) {
         this.nome = nome;
         this.nivel = nivel;
         this.felicidade = felicidade;
@@ -38,7 +59,14 @@ public class Pokemon {
         this.peso = peso;
         this.numeroPokedex = numeroPokedex;
         this.genero = genero;
+        this.tipos = tipos;
+        
     }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
     public String getNome() {
         return this.nome;
     }
@@ -66,13 +94,6 @@ public class Pokemon {
     public void setPeso(double peso) {
         this.peso = peso;
     }
-        
-    public String getGenero() {
-        return this.genero;
-    }
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
    
     public int getNumeroPokedex() {
         return this.numeroPokedex;
@@ -90,4 +111,8 @@ public class Pokemon {
 	public Long getId() {
 		return this.id;
 	}
+
+    public Collection<Tipo> getTipos() {
+        return tipos;
+    }
 }

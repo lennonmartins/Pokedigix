@@ -106,6 +106,29 @@ public class AtaqueRepositoryTest {
        
        assertTrue(ataquesRetornados.contains(ataque));
        assertEquals(1, ataquesRetornados.size());
+       assertNotNull(ataque.getTipo().getId());
+    }
+
+    @Test
+    public void deve_verificar_se_o_tipo_do_ataque_nao_nulo(){
+        String nomeEsperado = "Beijo Drenante";
+        int forcaEsperada = 50;
+        double acuraciaEsperada = 100;
+        int pontosDePoderEsperado = 10;
+        String descricaoEsperada = "O usuário rouba o HP do alvo com um beijo. O HP do usuário é restaurado em mais da metade do dano recebido pelo alvo.";
+        Categoria categoriaEsperada = Categoria.ESPECIAL;
+        Tipo tipoEsperado = new  Tipo("Fada");
+        
+        Ataque ataque = new Ataque(nomeEsperado, forcaEsperada, acuraciaEsperada, pontosDePoderEsperado, descricaoEsperada, categoriaEsperada, tipoEsperado);
+        
+        tipoRepository.save(tipoEsperado);
+        ataqueRepository.save(ataque);
+
+        Collection <Ataque> ataquesRetornados = ataqueRepository.findByCategoria(categoriaEsperada);
+       
+       assertTrue(ataquesRetornados.contains(ataque));
+       assertEquals(1, ataquesRetornados.size());
+       assertNotNull(ataque.getTipo().getId());
     }
 
 }

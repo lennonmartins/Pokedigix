@@ -31,6 +31,7 @@ public class Treinador {
     @OneToOne
     private Endereco endereco;
 
+    
     public Treinador(String nome, double dinheiro, int nivel, int quantidadePokemon, Endereco endereco) {
         this.nome = nome;
         this.dinheiro = dinheiro;
@@ -38,7 +39,11 @@ public class Treinador {
         this.quantidadePokemon = quantidadePokemon;
         this.endereco = endereco; 
     }
-
+    
+    public Endereco getEndereco() {
+        return endereco;
+    }
+    
     public String getNome() {
         return nome;
     }
