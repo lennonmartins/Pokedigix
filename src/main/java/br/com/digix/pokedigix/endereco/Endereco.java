@@ -27,17 +27,16 @@ public class Endereco {
     public String getCidade() {
         return this.cidade;
     }
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
+
     public String getRegiao() {
         return this.regiao;
     }
-    public void setRegiao(String regiao) {
-        this.regiao = regiao;
-    }
-
+    
     public Long getId() {
         return this.id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -20,7 +20,7 @@ public class AtaqueTest {
         Tipo tipoEsperado = new  Tipo("Psíquico");
 
         //Act
-        Ataque ataque = new Ataque(nomeEsperado, forcaEsperada, acuraciaEsperada, pontosDePoderEsperado, descricaoEsperada, categoriaEsperada, tipoEsperado);
+        Ataque ataque = new AtaqueBuilder().construir();
 
         //Arrange
         assertEquals(nomeEsperado, ataque.getNome());
@@ -52,15 +52,9 @@ public class AtaqueTest {
 
     @Test
     public void deve_ser_obrigatorio_informar_um_tipo(){
-        String nomeEsperado = "Confusão";
-        int forcaEsperada = 95;
-        double acuraciaEsperada = 110;
-        int pontosDePoderEsperado = 35;
-        String descricaoEsperada = "Causa confusão no oponente";
-        Categoria categoriaEsperada = Categoria.ESPECIAL;
         Tipo tipoEsperado = new  Tipo("Psíquico");
         
-        Ataque ataque = new Ataque(nomeEsperado, forcaEsperada, acuraciaEsperada, pontosDePoderEsperado, descricaoEsperada, categoriaEsperada, tipoEsperado);
+        Ataque ataque = new AtaqueBuilder().comTipo(tipoEsperado).construir();
 
         assertEquals(tipoEsperado, ataque.getTipo());
     }

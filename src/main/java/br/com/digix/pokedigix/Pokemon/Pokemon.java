@@ -2,6 +2,7 @@ package br.com.digix.pokedigix.pokemon;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,10 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.ManyToAny;
 
+import br.com.digix.pokedigix.ataque.Ataque;
 import br.com.digix.pokedigix.tipo.Tipo;
 
 @Entity
@@ -36,7 +39,7 @@ public class Pokemon {
     @Column(nullable = false)
     private int felicidade;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name="POKEMON_TIPO",
              joinColumns={@JoinColumn(name="POKEMON_ID")},
              inverseJoinColumns={@JoinColumn(name="TIPO_ID")})
@@ -50,8 +53,17 @@ public class Pokemon {
 
     @Column(nullable = false)
     private int numeroPokedex;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+        name = "POKEMON_ATAQUE",
+        joinColumns = @JoinColumn(name = "POKEMON_ID"),
+        inverseJoinColumns = @JoinColumn(name = "ATAQUE_ID")
+    )
+    private Collection<Ataque> ataques;
     
-    public Pokemon(String nome, int nivel, int felicidade,  double altura, double peso, int numeroPokedex, Genero genero, Collection<Tipo> tipos ) {
+    
+    public Pokemon(String nome, int nivel, int felicidade,  double altura, double peso, int numeroPokedex, Genero genero, Collection<Tipo> tipos, Collection<Ataque> ataques ) {
         this.nome = nome;
         this.nivel = nivel;
         this.felicidade = felicidade;
@@ -60,9 +72,13 @@ public class Pokemon {
         this.numeroPokedex = numeroPokedex;
         this.genero = genero;
         this.tipos = tipos;
+        this.ataques = ataques;
         
     }
-
+    
+    public Collection<Ataque> getAtaques() {
+        return ataques;
+    }
     public Genero getGenero() {
         return genero;
     }
@@ -115,4 +131,5 @@ public class Pokemon {
     public Collection<Tipo> getTipos() {
         return tipos;
     }
+
 }

@@ -1,5 +1,7 @@
 package br.com.digix.pokedigix.ataque;
 
+import java.util.Collection;
+
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,11 +10,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import br.com.digix.pokedigix.ataque.AcuraciaExcepetion;
-
+import br.com.digix.pokedigix.pokemon.Pokemon;
 import br.com.digix.pokedigix.tipo.Tipo;
 @Entity
 public class Ataque {
@@ -41,6 +44,10 @@ public class Ataque {
    @ManyToOne
    private Tipo tipo;
 
+   @ManyToMany(mappedBy = "ataques")
+   private Collection<Pokemon> pokemons;
+
+ 
    public Ataque(String nome, int forca, double acuracia, int pontosDePoder, String descricao, Categoria categoria, Tipo tipo) {
       this.nome = nome;
       this.forca = forca;
@@ -99,8 +106,9 @@ public class Ataque {
        return categoria;
    }
 
-
-   
+   public Collection<Pokemon> getPokemons() {
+      return pokemons;
+   }   
 
 
 }

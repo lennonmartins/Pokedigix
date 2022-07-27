@@ -13,15 +13,15 @@ public class LiderRepositoryTest {
     @Autowired
     private LiderRepository liderRepository;
 
-    @Test
-    public void deve_adicionar_um_lider(){
-        String nomeEsperado = "Lennon Broks";
-        Insignia insigniaEsperada = Insignia.MENTE; 
-        int nivelEsperado = 74;
+    // @Test
+    // public void deve_adicionar_um_lider(){
+    //     String nomeEsperado = "Lennon Broks";
+    //     Insignia insigniaEsperada = Insignia.MENTE; 
+    //     int nivelEsperado = 74;
 
-        Lider lider = new Lider(nomeEsperado, nivelEsperado, insigniaEsperada);
-        liderRepository.save(lider);
+    //     Lider lider = new Lider(nomeEsperado, nivelEsperado, insigniaEsperada);
+    //     liderRepository.save(lider);
 
-        assertNotNull(lider.getId());
-    }
+    //     assertNotNull(lider.getId());
+    // }
 }

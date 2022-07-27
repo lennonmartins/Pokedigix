@@ -17,16 +17,11 @@ public class TreinadorRepositoryTest {
 
     @Test
     public void deve_salvar_um_treinador(){
-        String nomeEsperado = "Francisco Roberto";
-        double dinheiroEsperado = 200;
-        int nivelEsperado = 0;
-        int quantidadePokemonEsperado = 0;
-        Endereco enderecoEsperado = new Endereco("Petalburg City", "Hoenn");
+    Treinador treinador = new TreinadorBuilder().construir();
 
-        Treinador treinador = new Treinador(nomeEsperado, dinheiroEsperado, nivelEsperado, quantidadePokemonEsperado, enderecoEsperado);
-        treinadorRepository.save(treinador);
+    treinadorRepository.save(treinador);
 
-        assertNotNull(treinador.getId());
+    assertNotNull(treinador.getId());
         
     }
 }

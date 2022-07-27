@@ -2,14 +2,19 @@ package br.com.digix.pokedigix.pokemon;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.repository.CrudRepository;
 
+import br.com.digix.pokedigix.ataque.Ataque;
+import br.com.digix.pokedigix.ataque.AtaqueBuilder;
 import br.com.digix.pokedigix.tipo.Tipo;
 
 @DataJpaTest
@@ -17,19 +22,12 @@ public class PokemonRepositoryTest {
     
     @Autowired
     private PokemonRepository pokemonRepository;
+    private CrudRepository<Pokemon, Long> tipoRepository;
+
     @Test
     public void deve_adicionar_um_pokemon(){
-        String nomeEsperado = "Ralts";
-        int nivelEsperado = 11;
-        int felicidadeEsperada = 25;
-        double alturaEsperado = 0.40;
-        double pesoEsperado = 7.0;
-        int numeroPokedexEsperado = 281;
-        Genero generoEsperado = Genero.F;
-        List <Tipo> tiposEsperados = new ArrayList<>();
-        tiposEsperados.add(new Tipo("Psíquico"));
         
-        Pokemon pokemon = new Pokemon(nomeEsperado, nivelEsperado, felicidadeEsperada, alturaEsperado, pesoEsperado, numeroPokedexEsperado, generoEsperado, tiposEsperados);
+        Pokemon pokemon = new PokemonBuilder().construir();
 
         pokemonRepository.save(pokemon);
 
@@ -38,42 +36,41 @@ public class PokemonRepositoryTest {
 
     @Test
     public void deve_cadastrar_um_tipo_para_o_pokemon(){
-        String nomeEsperado = "Ralts";
-        int nivelEsperado = 11;
-        int felicidadeEsperada = 25;
-        double alturaEsperado = 0.40;
-        double pesoEsperado = 7.0;
-        int numeroPokedexEsperado = 281;
-        Genero generoEsperado = Genero.F;
-        List <Tipo> tiposEsperados = new ArrayList<>();
-        tiposEsperados.add(new Tipo("Psíquico"));
+        Tipo tiposEsperados = new Tipo("Psíquico");
 
-        Pokemon pokemon = new Pokemon(nomeEsperado, nivelEsperado, felicidadeEsperada, alturaEsperado, pesoEsperado, numeroPokedexEsperado, generoEsperado, tiposEsperados );
+        Pokemon pokemon = new PokemonBuilder().comTipo(tiposEsperados).construir();
 
         pokemonRepository.save(pokemon);
 
-        assertEquals(tiposEsperados, pokemon.getTipos());
+        assertTrue(pokemon.getTipos().contains(tiposEsperados));
     }
 
     @Test
-    public void deve_verificar_se_tipo_nao_nulo(){
-        String nomeEsperado = "Ralts";
-        int nivelEsperado = 11;
-        int felicidadeEsperada = 25;
-        double alturaEsperado = 0.40;
-        double pesoEsperado = 7.0;
-        int numeroPokedexEsperado = 281;
-        Genero generoEsperado = Genero.F;
-        List <Tipo> tiposEsperados = new ArrayList<>();
-        tiposEsperados.add(new Tipo("Psíquico"));
+    public void deve_salvar_um_pokemon_com_um_tipo(){
+        int quantidadeDeTiposEsperada = 1;
+        Tipo tipo = new Tipo("Psíquico");
+        
 
-        Pokemon pokemon = new Pokemon(nomeEsperado, nivelEsperado, felicidadeEsperada, alturaEsperado, pesoEsperado, numeroPokedexEsperado, generoEsperado, tiposEsperados);
+        Pokemon pokemon = new PokemonBuilder().comTipo(tipo).construir();
 
         pokemonRepository.save(pokemon);
 
-        
+        Pokemon pokemonRetornados = pokemonRepository.findById(pokemon.getId()).get();
 
-        assertNotNull(pokemon.getTipos().iterator().next().getId());
+        assertNotNull(pokemonRetornados.getTipos());
+        assertEquals(quantidadeDeTiposEsperada, pokemonRetornados.getTipos().size());
+        assertTrue(pokemonRetornados.getTipos().contains(tipo));
+
+    }
+
+    @Test
+    public void deve_salvar_um_pokemon_com_ataque(){
+        Ataque ataque = new AtaqueBuilder().construir();
+        Pokemon pokemon = new PokemonBuilder().comAtaque(ataque).construir();
+
+        pokemonRepository.save(pokemon);
+
+        assertTrue(pokemon.getAtaques().contains(ataque));
     }
 
 
