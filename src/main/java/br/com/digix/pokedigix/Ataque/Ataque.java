@@ -14,7 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import br.com.digix.pokedigix.ataque.AcuraciaExcepetion;
 import br.com.digix.pokedigix.pokemon.Pokemon;
 import br.com.digix.pokedigix.tipo.Tipo;
 @Entity
@@ -48,7 +47,11 @@ public class Ataque {
    private Collection<Pokemon> pokemons;
 
  
-   public Ataque(String nome, int forca, double acuracia, int pontosDePoder, String descricao, Categoria categoria, Tipo tipo) {
+   public Ataque(String nome, int forca, double acuracia, int pontosDePoder, String descricao, Categoria categoria, Tipo tipo) throws Exception {
+
+      validarAcuracia(acuracia);
+      validarForca(categoria, forca);
+      validarTipo(categoria, tipo);
       this.nome = nome;
       this.forca = forca;
       this.acuracia = acuracia;
@@ -57,7 +60,34 @@ public class Ataque {
       this.categoria = categoria;
       this.tipo = tipo;
    }
+
+   private void validarTipo(Categoria categoria, Tipo tipo) throws TipoInvalidoParaCategoriaException {
+      if(categoria != Categoria.EFEITO && tipo == null){
+         throw new TipoInvalidoParaCategoriaException(categoria);
+      }
+   }
+
+   private void validarForca(Categoria categoria, int forca) throws ForcaInvalidaParaCategoriaException {
+      if(categoria != Categoria.EFEITO && forca <= 0){
+         throw new ForcaInvalidaParaCategoriaException(categoria);
+      }
+   }
+
+   private void validarAcuracia(double acuracia) throws AcuraciaInvalidaException {
+      if (acuracia < 0 || acuracia > 100){
+         throw new AcuraciaInvalidaException();
+      }
+   }
  
+   public Ataque(String nome, int acuracia, int pontosDePoder, String descricao) throws AcuraciaInvalidaException {
+      validarAcuracia(acuracia);
+      this.nome = nome;
+      this.acuracia = acuracia;
+      this.pontosDePoder = pontosDePoder;
+      this.descricao = descricao;
+      this.categoria = Categoria.EFEITO;
+   }
+
    public Tipo getTipo() {
       return tipo;
    }
@@ -76,13 +106,6 @@ public class Ataque {
    }
    public double getAcuracia() {
       return this.acuracia;
-   }
-   public void setAcuracia(double acuracia) throws AcuraciaExcepetion {
-      if (acuracia > 0 && acuracia <100) {
-         this.acuracia = acuracia;
-      }else{
-         throw new AcuraciaExcepetion();
-       }  
    }
 
    public int getPontosDePoder() {

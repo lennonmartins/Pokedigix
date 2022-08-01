@@ -24,7 +24,7 @@ public class AtaqueRepositoryTest {
     private TipoRepository tipoRepository;
 
     @Test
-    public void deve_salvar_um_ataque(){
+    public void deve_salvar_um_ataque()throws Exception{
         //Arrange
         String nomeEsperado = "Confusão";
         int forcaEsperada = 95;
@@ -43,7 +43,7 @@ public class AtaqueRepositoryTest {
     }
 
     @Test
-    public void deve_salvar_um_tipo_para_um_ataque(){
+    public void deve_salvar_um_tipo_para_um_ataque() throws Exception{
         String nomeEsperado = "Confusão";
         int forcaEsperada = 95;
         double acuraciaEsperada = 100;
@@ -66,7 +66,7 @@ public class AtaqueRepositoryTest {
     }
 
     @Test
-    public void deve_buscar_um_ataque_pelo_seu_tipo(){
+    public void deve_buscar_um_ataque_pelo_seu_tipo() throws Exception{
         String nomeEsperado = "Confusão";
         int forcaEsperada = 95;
         double acuraciaEsperada = 100;
@@ -87,7 +87,7 @@ public class AtaqueRepositoryTest {
     }
 
     @Test
-    public void deve_buscar_um_ataque_pelo_sua_categoria(){
+    public void deve_buscar_um_ataque_pelo_sua_categoria() throws Exception{
         String nomeEsperado = "Confusão";
         int forcaEsperada = 95;
         double acuraciaEsperada = 100;
@@ -110,7 +110,7 @@ public class AtaqueRepositoryTest {
     }
 
     @Test
-    public void deve_verificar_se_o_tipo_do_ataque_nao_nulo(){
+    public void deve_verificar_se_o_tipo_do_ataque_nao_nulo() throws Exception{
         String nomeEsperado = "Beijo Drenante";
         int forcaEsperada = 50;
         double acuraciaEsperada = 100;

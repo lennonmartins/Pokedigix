@@ -11,7 +11,6 @@ public class AtaqueBuilder {
     private String descricao;
     private Categoria categoria;
     private Tipo tipo;
-    private Tipo tipoEsperado;
 
     public AtaqueBuilder(){
         this.nome = "Confusão";
@@ -23,13 +22,44 @@ public class AtaqueBuilder {
         this.tipo = new  Tipo("Psíquico");
     }
 
-    public Ataque construir() {
-        return new Ataque(nome, forca, acuracia, pontosDePoder, descricao, categoria, tipo);
-    }
-
+    
     public AtaqueBuilder comTipo(Tipo tipoEsperado) {
         this.tipo = tipoEsperado;
         return this;
     }
+    
+    public AtaqueBuilder comAcuracia(int acuracia) {
+        this.acuracia = acuracia;
+        return this;
+    }
+    
+    public AtaqueBuilder comCategoriaEfeito() {
+        this.categoria = Categoria.EFEITO;
+        return this;
+    }
+
+    public AtaqueBuilder comForca(int forca) {
+        this.forca = forca;
+        return this;
+    }
+
+    public Ataque construir() throws Exception {
+        if(this.categoria.equals(Categoria.EFEITO)){
+           return new Ataque(nome,acuracia, pontosDePoder, descricao);
+        } else{
+            return new Ataque(nome, forca, acuracia, pontosDePoder, descricao, categoria, tipo);
+        }
+    }
+
+
+    public AtaqueBuilder comCategoria(Categoria categoria) {
+        this.categoria = categoria;
+        return this;
+    }
+
+
+
+
+
     
 }
