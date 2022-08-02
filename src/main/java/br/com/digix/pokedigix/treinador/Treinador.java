@@ -10,7 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 import br.com.digix.pokedigix.endereco.Endereco;
 import br.com.digix.pokedigix.lider.Insignia;
@@ -20,6 +19,8 @@ import br.com.digix.pokedigix.pokemon.Pokemon;
 @Entity
 public class Treinador extends Personagem {
     
+    private static final int LIMITE_POKEMON = 6;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -36,16 +37,24 @@ public class Treinador extends Personagem {
     private Collection<Insignia> insignias;
 
     
-    public Treinador( String nome, Endereco endereco, Pokemon primeiroPokemon ) {
+    public Treinador( String nome, Endereco endereco, Pokemon primeiroPokemon ) throws LimiteDePokemonException {
         super(nome, endereco);
         this.capturar(primeiroPokemon);
         this.dinheiro = 3000;
         this.nivel = 1;
     }
     
-    private void capturar(Pokemon primeiroPokemon) {
-        super.pokemons.add(primeiroPokemon);
+    public void capturar(Pokemon pokemonACapturar) throws LimiteDePokemonException {
+        
+        validarQuantidadeDePokemons();
+        super.pokemons.add(pokemonACapturar);
+    }
 
+    private void validarQuantidadeDePokemons() throws LimiteDePokemonException {
+        if(pokemons.size() == LIMITE_POKEMON){
+            throw new LimiteDePokemonException();
+        }
+        
     }
 
     public double getDinheiro() {

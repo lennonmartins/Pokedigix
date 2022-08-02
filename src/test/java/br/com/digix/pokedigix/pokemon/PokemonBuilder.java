@@ -39,12 +39,22 @@ public class PokemonBuilder {
         return this;
     }
 
-    public Pokemon construir() {      
+    public Pokemon construir() throws Exception {      
         return new Pokemon(nome, nivel, felicidade, altura, peso, numeroPokedex, genero, tipos, ataques);
     }
 
     public PokemonBuilder comTipo(Tipo tipo){
         this.tipos.add(tipo);
+        return this;
+    }
+
+    public PokemonBuilder comNivel(int nivelMinimo) {
+        this.nivel = nivelMinimo;
+        return this;
+    }
+
+    public PokemonBuilder comFelicidade(int felicidade) {
+        this.felicidade = felicidade;
         return this;
     }
     

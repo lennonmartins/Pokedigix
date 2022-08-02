@@ -26,7 +26,7 @@ public class PokemonRepositoryTest {
     private CrudRepository<Pokemon, Long> tipoRepository;
 
     @Test
-    public void deve_adicionar_um_pokemon(){
+    public void deve_adicionar_um_pokemon() throws Exception{
         
         Pokemon pokemon = new PokemonBuilder().construir();
 
@@ -36,7 +36,7 @@ public class PokemonRepositoryTest {
     }
 
     @Test
-    public void deve_cadastrar_um_tipo_para_o_pokemon(){
+    public void deve_cadastrar_um_tipo_para_o_pokemon() throws Exception{
         Tipo tiposEsperados = new Tipo("Psíquico");
 
         Pokemon pokemon = new PokemonBuilder().comTipo(tiposEsperados).construir();
@@ -47,7 +47,7 @@ public class PokemonRepositoryTest {
     }
 
     @Test
-    public void deve_salvar_um_pokemon_com_um_tipo(){
+    public void deve_salvar_um_pokemon_com_um_tipo() throws Exception{
         int quantidadeDeTiposEsperada = 1;
         Tipo tipo = new Tipo("Psíquico");
         
