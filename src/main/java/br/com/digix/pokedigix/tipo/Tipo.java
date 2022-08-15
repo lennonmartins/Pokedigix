@@ -24,6 +24,8 @@ public class Tipo {
     @ManyToMany(mappedBy = "tipos")
     private Collection<Pokemon> pokemons; 
 
+    protected Tipo () {}
+    
     //construtor;
     public Tipo(String nomeEsperado) {
         this.nome = nomeEsperado;
@@ -37,7 +39,7 @@ public class Tipo {
         this.pokemons = pokemons;
     }
 
-    public Object getNome() {
+    public String getNome() {
         return this.nome;
     }
     
