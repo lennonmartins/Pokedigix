@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import br.com.digix.pokedigix.endereco.Endereco;
+import br.com.digix.pokedigix.tipo.TipoRepository;
 
 @DataJpaTest
 public class TreinadorRepositoryTest {
@@ -24,4 +25,6 @@ public class TreinadorRepositoryTest {
     assertNotNull(treinador.getId());
         
     }
+
+    
 }
