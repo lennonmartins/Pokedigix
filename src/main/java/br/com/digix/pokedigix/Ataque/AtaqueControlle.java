@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +41,7 @@ public class AtaqueControlle{
     @Operation(summary = "Criar um novo ataque usando um tipo")
     @ApiResponse(responseCode = "201", description = "Ataque criado usando tipo")
     @PostMapping(consumes = {"application/json"})
-    public AtaqueResponseDTO criarAtaque(@RequestBody AtaqueRequestDTO novoAtaque) throws Exception{
+    public ResponseEntity<AtaqueResponseDTO> criarAtaque(@RequestBody AtaqueRequestDTO novoAtaque) throws Exception{
         //Obtendo as informçãoe e salvando
         Tipo tipo = tipoRepository.findById(novoAtaque.getTipoId()).get();
         Ataque ataque = new Ataque(novoAtaque.getNome(), novoAtaque.getForca(), novoAtaque.getAcuracia(), novoAtaque.getPontosDePoder(), novoAtaque.getDescricao(), novoAtaque.getCategoria(), tipo);
@@ -48,7 +49,7 @@ public class AtaqueControlle{
 
         //Respondendo para o usuário
         TipoResponseDTO tipoResponseDTO = new TipoResponseDTO(tipo.getId(), tipo.getNome());
-        return new AtaqueResponseDTO(ataque.getId(), ataque.getNome(), ataque.getForca(), ataque.getAcuracia(), ataque.getPontosDePoder(), ataque.getDescricao(), ataque.getCategoria(), tipoResponseDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new AtaqueResponseDTO(ataque.getId(), ataque.getNome(), ataque.getForca(), ataque.getAcuracia(), ataque.getPontosDePoder(), ataque.getDescricao(), ataque.getCategoria(), tipoResponseDTO));
     }
 
 
